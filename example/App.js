@@ -15,7 +15,7 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-import moment from 'moment'
+import dayjs from 'dayjs';
 
 import { WheelPicker, TimePicker, DatePicker } from 'react-native-wheel-picker-android'
 
@@ -36,20 +36,22 @@ const App: () => React$Node = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic">
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
           <Text>{weekdays[selectedItem]}</Text>
-          <WheelPicker onItemSelected={(index) => setSelectedItem(index)} data={weekdays}/>
-          <Text>{moment(time).format('hh:mm a')}</Text>
-          <TimePicker 
-            initDate={new Date(moment().add(1, 'hour'))} 
+          <WheelPicker
+            onItemSelected={(index) => setSelectedItem(index)}
+            data={weekdays}
+          />
+          <Text>{dayjs(time).format('hh:mm a')}</Text>
+          <TimePicker
+            initDate={new Date(dayjs().add(1, 'hour'))}
             onTimeSelected={(time) => {
-              setTime(time)
-              console.log('setting time', time)
-            }
-          }/>
-          <Text>{moment(date).format('DD.MM.YY hh:mm a')}</Text>
-          <DatePicker mode={'date'} onDateSelected={date => setDate(date)}/>
+              setTime(time);
+              console.log('setting time', time);
+            }}
+          />
+          <Text>{dayjs(date).format('DD.MM.YY hh:mm a')}</Text>
+          <DatePicker mode={'date'} onDateSelected={(date) => setDate(date)} />
         </ScrollView>
       </SafeAreaView>
     </>

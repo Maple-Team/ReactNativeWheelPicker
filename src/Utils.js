@@ -3,7 +3,7 @@
  * @flow
  * */
 
-import moment from 'moment'
+import dayjs from "dayjs";
 
 const DEFAULT_DATE_PICKER_FORMAT = 'ddd MMM D'
 
@@ -16,7 +16,7 @@ const ONE_SECOND = 1000;
 
 // it takes in format '12 AM' and return 24 format
 export function hourTo24Format(hour: string) {
-    return parseInt(moment(hour, ['h A']).format('H'), 10)
+    return parseInt(dayjs(hour, ["h A"]).format("H"), 10);
 }
 
 // it takes in format 23 and return [11,'PM'] format
@@ -53,21 +53,22 @@ export function pickerDateArray(date: string, daysCount: number = YEAR, datePick
 
     for (let i = 0; i < daysCount; i++) {
         const ithDateFromStartDate = (Date.parse(startDate) / ONE_SECOND) + (i * ONE_DAY_IN_SECONDS)
-        if (moment.unix(Date.parse(new Date()) / ONE_SECOND).format('MM/DD/YYYY') ===
-            moment.unix(ithDateFromStartDate).format('MM/DD/YYYY')) {
-            arr.push(TODAY)
-        }
-        else {
-            arr.push(
-                formatDatePicker(ithDateFromStartDate, datePickerFormat)
-            )
+        if (
+          dayjs
+            .unix(Date.parse(new Date()) / ONE_SECOND)
+            .format("MM/DD/YYYY") ===
+          dayjs.unix(ithDateFromStartDate).format("MM/DD/YYYY")
+        ) {
+          arr.push(TODAY);
+        } else {
+          arr.push(formatDatePicker(ithDateFromStartDate, datePickerFormat));
         }
     }
     return arr
 }
 
 function formatDatePicker(date: number, format: string) {
-    return moment.unix(date).format(format);
+    return dayjs.unix(date).format(format);
 }
 
 export function getHoursArray(format24: boolean) {
