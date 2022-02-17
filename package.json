@@ -12,9 +12,7 @@
     "react-native",
     "android",
     "picker",
-    "wheel-picker",
-    "date-picker",
-    "date-wheel-picker"
+    "wheel-picker"
   ],
   "author": "Artem Kosiakevych <artem.kosiakevych@gmail.com>",
   "license": "MIT",

@@ -9,15 +9,12 @@
 import React, {useState} from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
   ScrollView,
-  View,
   Text,
   StatusBar,
 } from 'react-native';
-import dayjs from 'dayjs';
 
-import { WheelPicker, TimePicker, DatePicker } from 'react-native-wheel-picker-android'
+import { WheelPicker,  } from 'react-native-wheel-picker-android'
 
 const weekdays = [
   'sunday',
@@ -30,8 +27,6 @@ const weekdays = [
 
 const App: () => React$Node = () => {
   const [selectedItem, setSelectedItem] = useState(0)
-  const [time, setTime] = useState(new Date())
-  const [date, setDate] = useState(new Date())
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -42,16 +37,6 @@ const App: () => React$Node = () => {
             onItemSelected={(index) => setSelectedItem(index)}
             data={weekdays}
           />
-          <Text>{dayjs(time).format('hh:mm a')}</Text>
-          <TimePicker
-            initDate={new Date(dayjs().add(1, 'hour'))}
-            onTimeSelected={(time) => {
-              setTime(time);
-              console.log('setting time', time);
-            }}
-          />
-          <Text>{dayjs(date).format('DD.MM.YY hh:mm a')}</Text>
-          <DatePicker mode={'date'} onDateSelected={(date) => setDate(date)} />
         </ScrollView>
       </SafeAreaView>
     </>
